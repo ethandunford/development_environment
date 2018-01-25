@@ -1,19 +1,20 @@
-#-- ----------------------------------------------------------------------------
-#--
-#-- Title:        development_environment.py
-#-- Desc:         Download all necessary software for development 
-#-- License:      Apache License https://www.apache.org/licenses/LICENSE-2.0
-#-- Author:       Ethan Dunford
-#-- Date:         18/01/2017
-#-- Version:      0.1
-#-- ----------------------------------------------------------------------------
+# -- ---------------------------------------------------------------------------
+# --
+# -- Title:        development_environment.py
+# -- Desc:         Download all necessary software for development
+# -- License:      Apache License https://www.apache.org/licenses/LICENSE-2.0
+# -- Author:       Ethan Dunford
+# -- Date:         18/01/2017
+# -- Version:      0.1
+# -- ---------------------------------------------------------------------------
 import os
+
 
 class Ubuntu(object):
 
-    #-- system tools
-    #-- ------------------------------------------------------------------------
- 
+    # -- system tools
+    # -- -----------------------------------------------------------------------
+
     def update(self):
         os.system('sudo apt-get update')
 
@@ -31,9 +32,8 @@ class Ubuntu(object):
     def install_git(self):
         os.system('sudo apt-get install git')
 
-
-    #-- webservers
-    #-- ------------------------------------------------------------------------
+    # -- webservers
+    # -- -----------------------------------------------------------------------
 
     def install_apache(self):
         os.system('sudo apt-get install apache2')
@@ -49,10 +49,9 @@ class Ubuntu(object):
         os.system('sudo apt-get install nodejs')
         os.system('sudo apt-get install npm')
 
+    # -- lanagauges
+    # -- -----------------------------------------------------------------------
 
-    #-- lanagauges
-    #-- ------------------------------------------------------------------------
- 
     def install_python_three(self):
         os.system('sudo apt-get -y upgrade')
         os.system('sudo apt-get install -y python3-pip')
@@ -74,10 +73,9 @@ class Ubuntu(object):
         os.system('sudo sed -i "s/display_errors = Off/display_errors = On/g" /etc/php/7.0/apache2/php.ini')
         self.reload_apache()
 
+    # -- database
+    # -- -----------------------------------------------------------------------
 
-    #-- database
-    #-- ------------------------------------------------------------------------
- 
     def install_postgres(self):
         os.system('sudo apt-get install postgresql postgresql-contrib')
 
@@ -96,9 +94,8 @@ class Ubuntu(object):
         os.system('sudo apt-get install mysql-server')
         os.system('mysql_secure_installation')
 
-
-    #-- containers
-    #-- ------------------------------------------------------------------------
+    # -- containers
+    # -- -----------------------------------------------------------------------
 
     def install_docker(self):
         self.install_curl()
@@ -110,9 +107,8 @@ class Ubuntu(object):
         os.system('Install docker-ce')
         os.system('sudo apt-get install docker-ce')
 
-
-    #-- software
-    #-- ------------------------------------------------------------------------
+    # -- software
+    # -- -----------------------------------------------------------------------
 
     def install_sublime(self):
         self.install_curl()
@@ -149,22 +145,49 @@ class Ubuntu(object):
         os.system('sudo apt install -f')
         os.system('sudo rm -rf skypeforlinux-64.deb')
 
-    #-- Development stacks
-    #-- ------------------------------------------------------------------------
+    # -- atom plugins
+    # -- -----------------------------------------------------------------------
+
+    def atom_terminal(self):
+        os.system('apm install platformio-ide-terminal')
+
+    def atom_python(self):
+        os.system('pip instal flake8')
+        os.system('pip install pep8')
+        os.system('apm install linter-flake8')
+        os.system('apm install linter-python-pep8')
+        os.system('apm install autocomplete-python')
+
+    def atom_web_development(self):
+        os.system('apm install emmet')
+        os.system('apm install atom-beautify')
+        os.system('apm install linter-eslint')
+
+    def atom_mini_map(self):
+        os.system('apm install Minimap')
+
+    def atom_autocomplete_paths(self):
+        os.system('apm install autocomplete-paths')
+
+    def atom_php(self):
+        os.system('apm install linter-php')
+
+    # -- Development stacks
+    # -- -----------------------------------------------------------------------
 
     def lamp_stack(self, show_errors=False):
         self.update()
         self.install_apache()
-        self.install_php_seven()        
-        if show_errors is True:        
+        self.install_php_seven()
+        if show_errors is True:
             self.php_seven_show_errors()
         self.install_mysql()
 
-    def lapp_stack(self):
+    def lapp_stack(self, show_errors=False):
         self.update()
         self.install_apache()
-        self.install_php_seven()        
-        if show_errors is True:        
+        self.install_php_seven()
+        if show_errors is True:
             self.php_seven_show_errors()
         self.install_postgres()
 
@@ -187,10 +210,8 @@ class Ubuntu(object):
         self.install_postgres()
         self.allow_local_postgres()
 
-
-
-#-- Example 
-#-- ----------------------------------------------------------------------------
+# -- Example
+# -- ---------------------------------------------------------------------------
 
 # u = Ubuntu()
 # u.setup()
